@@ -1,5 +1,6 @@
 ﻿using Api.DataAccess;
 using Api.Entities;
+using Api.Interfaces;
 using Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,9 +12,11 @@ namespace Api.Controllers
     public class AccountController : BaseApiController
     {
         private readonly DataContext _context;
-        public AccountController(DataContext _context)
+        private readonly ITokenServices token;
+        public AccountController(DataContext _context, ITokenServices token)
         {
             this._context = _context;
+            this.token = token;
         }
 
         [HttpPost("register")]
@@ -36,7 +39,7 @@ namespace Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<AppUser>> Login(Login login)
+        public async Task<ActionResult<UserToken>> Login(Login login)
         {
             var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == login.UserName);
             if (user == null)
@@ -47,12 +50,16 @@ namespace Api.Controllers
             var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(login.Password));
             for (int i = 0; i < computedHash.Length; i++)
             {
-                if(user.PasswordHash[i] != computedHash[i])
+                if (user.PasswordHash[i] != computedHash[i])
                 {
                     return Unauthorized("Invalid Password");
                 }
             }
-            return Ok(user);
+            return new UserToken
+            {
+                UserName = user.UserName,
+                Token = token.CreateToken(user)
+            };
         }
 
         #region Private Helpers
