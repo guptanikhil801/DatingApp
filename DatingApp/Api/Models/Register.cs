@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+
 namespace Api.Models
 {
     public class Register
@@ -8,6 +9,7 @@ namespace Api.Models
         public string UserName { get; set; }
 
         [Required]
+        [RegularExpression("^[A-Za-z]{1,10}[0-9]{1,10}$")]
         public string Password { get; set; }
     }
 }

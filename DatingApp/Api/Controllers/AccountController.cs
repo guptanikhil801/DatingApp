@@ -21,7 +21,7 @@ namespace Api.Controllers
         {
             if (await UserExists(register.UserName))
             {
-                return BadRequest();
+                return BadRequest("UserName is taken.");
             }
             using var hmac = new HMACSHA512();
             var user = new AppUser
@@ -33,6 +33,26 @@ namespace Api.Controllers
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<AppUser>> Login(Login login)
+        {
+            var user = await _context.Users.SingleOrDefaultAsync(x => x.UserName == login.UserName);
+            if (user == null)
+            {
+                return Unauthorized("Invalid User");
+            }
+            using var hmac = new HMACSHA512(user.PasswordSalt);
+            var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(login.Password));
+            for (int i = 0; i < computedHash.Length; i++)
+            {
+                if(user.PasswordHash[i] != computedHash[i])
+                {
+                    return Unauthorized("Invalid Password");
+                }
+            }
+            return Ok(user);
         }
 
         #region Private Helpers
