@@ -20,11 +20,11 @@
             </li>
         </ul>
         <form *ngIf="!loggedIn" class="form-inline my-2 my-md-0">
-            <input class="form-control" type="text" placeholder="Username">
-            <input class="form-control ml-1" type="password" placeholder="Password">
+            <input [formControl]="userName" class="form-control" type="text" placeholder="Username">
+            <input [formControl]="password" class="form-control ml-1" type="password" placeholder="Password">
         </form>
-        <button *ngIf="!loggedIn" class="btn btn-light ml-2 mr-4">Login</button>
-        <div *ngIf="loggedIn" class="btn-group" dropdown>
+        <button (click)="login()" *ngIf="!loggedIn" class="btn btn-light ml-2 mr-4">Login</button>
+        <div *ngIf="loggedIn" class="btn-group ml-auto mr-auto" dropdown>
             <button id="button-autoclose1" dropdownToggle type="button" class="btn btn-dark dropdown-toggle"
                 aria-controls="dropdown-autoclose1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
@@ -36,7 +36,7 @@
             <ul id="dropdown-autoclose1" *dropdownMenu class="dropdown-menu" role="menu"
                 aria-labelledby="button-autoclose1">
                 <li role="menuitem"><a class="dropdown-item" href="#">Edit Profile</a></li>
-                <li role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
+                <li (click)="logOut()" role="menuitem"><a class="dropdown-item" href="#">Logout</a></li>
             </ul>
         </div>
     </div>

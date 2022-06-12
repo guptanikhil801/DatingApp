@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './components/nav/nav.component';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     HttpClientModule,
     BrowserAnimationsModule,
     BsDropdownModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

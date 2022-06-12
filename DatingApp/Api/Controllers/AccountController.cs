@@ -38,6 +38,11 @@ namespace Api.Controllers
             return user;
         }
 
+        /// <summary>
+        /// Dafault credential : UserName : guptanikhil801, Password: DatingApp1
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         public async Task<ActionResult<UserToken>> Login(Login login)
         {

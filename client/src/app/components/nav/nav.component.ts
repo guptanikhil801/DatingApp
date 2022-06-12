@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -7,15 +8,21 @@ import { AccountService } from 'src/app/_services/account.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  model: any = {}
+  userName = new FormControl('');
+  password = new FormControl('');
   loggedIn: boolean = false;
+
   constructor(private accountService: AccountService) { }
 
   ngOnInit(): void {
   }
 
   login() {
-    this.accountService.login(this.model).subscribe(response => {
+    let data = {
+      UserName: this.userName.value,
+      Password: this.password.value
+    }
+    this.accountService.login(data).subscribe(response => {
       this.loggedIn = true;
       console.log(response);
     }, error => {
