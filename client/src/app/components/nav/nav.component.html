@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Dating App</a>
+    <a class="navbar-brand " href="#">Dating App</a>
     <button class="navbar-toggler x" type="button" data-toggle="collapse" data-target="#navbarsExample05"
         aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
         <span class="icon-bar"></span>
@@ -19,12 +19,15 @@
                 <a class="nav-link" href="#">Messages </a>
             </li>
         </ul>
-        <form *ngIf="(accountService.currentUser$ | async) === null" class="form-inline my-2 my-md-0">
+
+        <form style="margin-left: 53%;" *ngIf="(accountService.currentUser$ | async) === null"
+            class="form-inline my-2 my-md-0">
             <input [formControl]="userName" class="form-control" type="text" placeholder="Username">
             <input [formControl]="password" class="form-control ml-1" type="password" placeholder="Password">
         </form>
         <button (click)="login()" *ngIf="(accountService.currentUser$ | async) === null"
             class="btn btn-light ml-2 mr-4">Login</button>
+
         <div *ngIf="accountService.currentUser$ | async " class="btn-group ml-auto mr-auto" dropdown>
             <button id="button-autoclose1" dropdownToggle type="button" class="btn btn-dark dropdown-toggle"
                 aria-controls="dropdown-autoclose1">
