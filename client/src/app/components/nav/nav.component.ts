@@ -1,8 +1,5 @@
-import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { User } from 'src/app/_models/user';
 import { AccountService } from 'src/app/_services/account.service';
 
 @Component({
@@ -13,12 +10,10 @@ import { AccountService } from 'src/app/_services/account.service';
 export class NavComponent implements OnInit {
   userName = new FormControl('');
   password = new FormControl('');
-  currentUser$: Observable<User>;
 
-  constructor(private accountService: AccountService) { }
+  constructor(public accountService: AccountService) { }
 
   ngOnInit(): void {
-    this.currentUser$ = this.accountService.currentUsers$;
   }
 
   login() {
