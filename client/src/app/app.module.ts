@@ -11,13 +11,21 @@ import { AccountService } from './_services/account.service';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { FormsModule } from '@angular/forms';
+import { MemberListComponent } from './components/members/member-list/member-list.component';
+import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
+import { ListsComponent } from './components/members/lists/lists.component';
+import { MessagesComponent } from './components/members/messages/messages.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    MemberListComponent,
+    MemberDetailComponent,
+    ListsComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,
