@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavComponent } from './components/nav/nav.component';
-import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AccountService } from './_services/account.service';
 import { HomeComponent } from './components/home/home.component';
@@ -15,7 +14,7 @@ import { MemberListComponent } from './components/members/member-list/member-lis
 import { MemberDetailComponent } from './components/members/member-detail/member-detail.component';
 import { ListsComponent } from './components/members/lists/lists.component';
 import { MessagesComponent } from './components/members/messages/messages.component';
-import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './_modules/shared.module';
 
 @NgModule({
   declarations: [
@@ -33,12 +32,9 @@ import { ToastrModule } from 'ngx-toastr';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    BsDropdownModule.forRoot(),
     ReactiveFormsModule,
     FormsModule,
-    ToastrModule.forRoot({
-      positionClass: 'toast-bottom-right'
-    })
+    SharedModule//custom module which contains other modules to keep app module clean
   ],
   providers: [AccountService],
   bootstrap: [AppComponent]
