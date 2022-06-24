@@ -1,11 +1,11 @@
-﻿using Api.DataAccess;
+﻿using System.Security.Cryptography;
+using System.Text;
+using Api.DataAccess;
 using Api.Entities;
 using Api.Interfaces;
 using Api.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace Api.Controllers
 {
@@ -13,6 +13,7 @@ namespace Api.Controllers
     {
         private readonly DataContext _context;
         private readonly ITokenServices token;
+
         public AccountController(DataContext _context, ITokenServices token)
         {
             this._context = _context;
@@ -68,11 +69,13 @@ namespace Api.Controllers
         }
 
         #region Private Helpers
+
         private async Task<bool> UserExists(string UserName)
         {
             var user = _context.Users.AnyAsync(x => x.UserName == UserName.ToLower());
             return await user;
         }
-        #endregion
+
+        #endregion Private Helpers
     }
 }

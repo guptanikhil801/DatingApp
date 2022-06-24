@@ -1,19 +1,21 @@
-﻿using Api.Entities;
-using Api.Interfaces;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Api.Entities;
+using Api.Interfaces;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Api.Services
 {
     public class TokenServices : ITokenServices
     {
         private readonly SymmetricSecurityKey _key;
+
         public TokenServices(IConfiguration config)
         {
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
+
         public string CreateToken(AppUser user)
         {
             var claims = new List<Claim>
