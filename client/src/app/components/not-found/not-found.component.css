@@ -1,0 +1,10 @@
+.div2 {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8%;
+}
+
+#homePage-btn {
+    margin-left: 30%;
+    margin-right: 30%;
+}
